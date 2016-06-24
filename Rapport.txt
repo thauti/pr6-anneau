@@ -1,0 +1,30 @@
+
+Le protocole est compose de six classes : AnneauTest, Entite, EntiteMulticast, EntiteTCP, EntiteUDP.
+
+AnneauTest : Lance un chrono pour tester si un anneau est toujours fonctionnel.
+Entite : traite les messages recus; les envoie sur le port correspondant (UDP/TCP, deux cibles dans le cas d'un doubleur)
+EntiteMulticast : gere les connexions multicast
+EntiteTCP : gere les connexions TCP
+EntiteUDP : gere les connexions UDP
+
+Nous avons egalement code quatres applications : diffusion de messages, transfert de fichiers, un envoi de messages prives ([APPL idmess DIFFMP## idcible size-mess mess]), et un serveur web répondant à des instructions du protocole HTTP/1.x.
+
+Nous avons implemente des methodes de debug :
+
+DEBUGTRANS fichier : cherche a telecharger le fichier passe en argument
+DEBUGTEST : envoie un message TEST sur le premier anneau de l'Entite
+DEBUGWHOS : envoie un message WHOS sur le premier anneau de l'Entite
+DEBUGQUIT : deconnecte du reseau
+DEBUGMSGMP id : envoie un message prive a l'entite id
+
+Compilation :
+ 
+javac *.java
+
+Execution :
+
+java test -a PORTUDP IPDIFF PORTDIFF [-web portweb] // Créer une Entite et son anneau
+java test IP PORTTCP PORTUDP [-web portweb] // Permet de se connecter à une Entite
+java test ip porttcp portudp ipdiff portdiff [-web portweb] // Permet de se connecter à une Entite en demandant un double anneau.
+
+[-web portweb] Arguments facultatifs permettant de lancer un serveur web sur le port <portweb>
